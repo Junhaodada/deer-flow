@@ -1,5 +1,5 @@
 # Backend Development Dockerfile
-FROM python:3.12-slim
+FROM dockerproxy.net/library/python:3.12-slim
 
 ARG NODE_MAJOR=22
 

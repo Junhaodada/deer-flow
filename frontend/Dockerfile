@@ -6,7 +6,7 @@
 ARG PNPM_STORE_PATH=/root/.local/share/pnpm/store
 
 # ── Base: shared setup ────────────────────────────────────────────────────────
-FROM node:22-alpine AS base
+FROM dockerproxy.net/library/node:22-alpine AS base
 ARG PNPM_STORE_PATH
 # 修复 corepack 命令：补充依赖 + 手动安装 corepack（Node.js 22 适配）
 RUN apk add --no-cache curl && \
@@ -30,7 +30,7 @@ RUN cd /app/frontend && pnpm install --frozen-lockfile
 RUN cd /app/frontend && SKIP_ENV_VALIDATION=1 pnpm build
 
 # ── Prod: minimal runtime with pre-built output ───────────────────────────────
-FROM node:22-alpine AS prod
+FROM dockerproxy.net/library/node:22-alpine AS prod
 ARG PNPM_STORE_PATH
 # 同样修复 prod 阶段的 corepack 命令
 RUN apk add --no-cache curl && \
